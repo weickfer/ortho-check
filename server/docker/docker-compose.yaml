@@ -1,0 +1,11 @@
+name: ortho-check
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8081:80"
+    volumes:
+      - ./tiles:/usr/share/nginx/html/tiles:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
