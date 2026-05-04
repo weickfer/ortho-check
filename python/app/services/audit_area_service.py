@@ -20,7 +20,7 @@ class AuditAreaService:
             description=request.description,
             geometry=f"SRID=4326;{request.geometry}",
             captured_at=request.captured_at,
-            image_path=output_path
+            image_path=output_path,
             area_sq_meters=area
         )
 
