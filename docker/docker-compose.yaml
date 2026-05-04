@@ -27,7 +27,7 @@ services:
     ports:
       - "1320:8000"
     volumes:
-      - ./data:/data
+      - ./nginx/data:/data
     depends_on:
       - db
 
