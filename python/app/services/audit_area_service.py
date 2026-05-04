@@ -1,7 +1,9 @@
 from shapely import wkt
 from app.entities.audit_area import AuditArea
+from app.entities.audit_analylis import AuditAnalysis
 from app.repositories.audit_area_repository import AuditAreaRepository
 from app.geoprocessing.raster_service import crop_tiff
+from app.services.openai_service import analyze_bridge_image
 import math
 
 class AuditAreaService:
@@ -24,8 +26,20 @@ class AuditAreaService:
             area_sq_meters=area
         )
 
+        saved_entity = self.repo.save(db, entity)
 
-        return self.repo.save(db, entity)
+        # Pipeline de IA: Analisa a imagem da ponte com OpenAI
+        ai_analysis_result = analyze_bridge_image(output_path)
+
+        # Salva o resultado no banco
+        analysis = AuditAnalysis(
+            audit_area_id=saved_entity.id,
+            description=ai_analysis_result
+        )
+        db.add(analysis)
+        db.commit()
+
+        return saved_entity
 
     def calculate_area(self, polygon):
         centroid_lat = polygon.centroid.y

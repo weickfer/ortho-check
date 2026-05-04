@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date, DateTime, Float
 from geoalchemy2 import Geometry
 from datetime import datetime
+from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 class AuditArea(Base):
@@ -13,3 +14,8 @@ class AuditArea(Base):
     image_path = Column(String, nullable=False)
     captured_at = Column(Date)
     created_at = Column(DateTime, default=datetime.utcnow)
+    analyses = relationship(
+        "AuditAnalysis",
+        back_populates="audit_area",
+        order_by="AuditAnalysis.created_at.desc()"
+    )
