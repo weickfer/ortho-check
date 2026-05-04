@@ -8,6 +8,7 @@ services:
     volumes:
       - ./nginx/tiles:/usr/share/nginx/html/tiles:ro
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/data:/usr/share/nginx/data:ro
     restart: unless-stopped
     depends_on:
       - python-api
