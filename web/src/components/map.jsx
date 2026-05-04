@@ -10,7 +10,7 @@ import { fromLonLat } from 'ol/proj';
 import OSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
 import XYZ from 'ol/source/XYZ';
-import { Style, Fill, Stroke } from 'ol/style';
+import { Fill, Stroke, Style } from 'ol/style';
 import { useEffect, useRef, useState } from 'react';
 import { createAuditArea, listAuditAreas } from '../services/api';
 import { DateSelector } from './DateSelector';
@@ -81,7 +81,7 @@ export function Map() {
   // Efeito para carregar as geometrias do backend quando a data mudar
   useEffect(() => {
     if (!vectorSourceRef.current) return;
-    
+
     // Limpar geometrias anteriores
     vectorSourceRef.current.clear();
 
@@ -160,7 +160,7 @@ export function Map() {
             const newArea = await createAuditArea({
               description,
               geometry,
-              capturedAt: selectedDate
+              captured_at: selectedDate
             });
 
             feature.setId(newArea.id);
@@ -192,9 +192,9 @@ export function Map() {
       />
 
       {/* Seletor de Data */}
-      <DateSelector 
-        selectedDate={selectedDate} 
-        onDateChange={setSelectedDate} 
+      <DateSelector
+        selectedDate={selectedDate}
+        onDateChange={setSelectedDate}
       />
 
       {/* Controles de UI sobrepostos ao mapa */}
