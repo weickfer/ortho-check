@@ -2,6 +2,7 @@ import rasterio
 from rasterio.mask import mask
 import geopandas as gpd
 import uuid
+import os
 
 def crop_tiff(tiff_path, geometry, output_dir="/data/outputs"):
     # Verifica se recebemos um GeoJSON (dict) ou um objeto Shapely direto
@@ -17,6 +18,10 @@ def crop_tiff(tiff_path, geometry, output_dir="/data/outputs"):
         out_image, out_transform = mask(src, gdf.geometry, crop=True)
 
         filename = f"{uuid.uuid4()}.png"
+        
+        # Garante que o diretório de destino exista antes de salvar
+        os.makedirs(output_dir, exist_ok=True)
+        
         output_path = f"{output_dir}/{filename}"
 
         meta = src.meta.copy()
