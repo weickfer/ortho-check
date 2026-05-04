@@ -14,14 +14,15 @@ class AuditAreaService:
 
         area = self.calculate_area(geom)
 
+        output_path = crop_tiff("/data/02-02-2026.tif", geom, "/data/outputs")
+        
         entity = AuditArea(
             description=request.description,
             geometry=f"SRID=4326;{request.geometry}",
             captured_at=request.captured_at,
+            image_path=output_path
             area_sq_meters=area
         )
-
-        crop_tiff("/data/02-02-2026.tif", geom, "/data/outputs")
 
 
         return self.repo.save(db, entity)

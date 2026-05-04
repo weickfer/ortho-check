@@ -10,5 +10,6 @@ class AuditArea(Base):
     description = Column(String, nullable=False)
     geometry = Column(Geometry("POLYGON", srid=4326))
     area_sq_meters = Column(Float)
+    image_path = Column(String, nullable=False)
     captured_at = Column(Date)
     created_at = Column(DateTime, default=datetime.utcnow)
