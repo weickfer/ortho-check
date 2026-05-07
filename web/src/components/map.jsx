@@ -7,9 +7,9 @@ import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import 'ol/ol.css';
 import { fromLonLat } from 'ol/proj';
+import { XYZ } from 'ol/source';
 import OSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
-import XYZ from 'ol/source/XYZ';
 import { Fill, Stroke, Style } from 'ol/style';
 import { useEffect, useRef, useState } from 'react';
 import { createAuditArea, listAuditAreas } from '../services/api';
@@ -24,8 +24,11 @@ export function Map() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get('date') || '2024-04-30';
+    const date = !!params.get('date') ? new Date(params.get('date')) : new Date()
+
+    return date;
   });
+  const formattedDate = selectedDate.toISOString().split("T")[0]
 
   useEffect(() => {
     if (mapInstanceRef.current) return; // já inicializado
@@ -44,8 +47,10 @@ export function Map() {
       })
     });
 
+    const xyz = `http://localhost:8082/tiles/${formattedDate}/{z}/{x}/{y}.png`
+
     orthoSourceRef.current = new XYZ({
-      url: `http://localhost:8082/tiles/${selectedDate}/{z}/{x}/{y}.png`,
+      url: xyz,
       maxZoom: 22,
     });
 
@@ -108,12 +113,12 @@ export function Map() {
   // Efeito para atualizar a URL do XYZ e a query string sempre que a data selecionada mudar
   useEffect(() => {
     if (orthoSourceRef.current) {
-      orthoSourceRef.current.setUrl(`http://localhost:8082/tiles/${selectedDate}/{z}/{x}/{y}.png`);
+      orthoSourceRef.current.setUrl(`http://localhost:8082/tiles/${formattedDate}/{z}/{x}/{y}.png`);
     }
 
     const params = new URLSearchParams(window.location.search);
     if (selectedDate) {
-      params.set('date', selectedDate);
+      params.set('date', selectedDate.toISOString().split("T")[0]);
     } else {
       params.delete('date');
     }
@@ -160,12 +165,12 @@ export function Map() {
             const newArea = await createAuditArea({
               description,
               geometry,
-              captured_at: selectedDate
+              captured_at: formattedDate
             });
 
             feature.setId(newArea.id);
             feature.set('description', description);
-            feature.set('capturedAt', selectedDate);
+            feature.set('capturedAt', formattedDate);
           } catch (err) {
             console.error("Erro ao salvar área:", err);
             vectorSourceRef.current.removeFeature(feature);

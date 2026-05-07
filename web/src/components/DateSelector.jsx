@@ -1,4 +1,6 @@
 export function DateSelector({ selectedDate, onDateChange }) {
+  const formattedDate = selectedDate.toISOString().split("T")[0]
+
   return (
     <div style={{
       position: 'absolute',
@@ -19,8 +21,8 @@ export function DateSelector({ selectedDate, onDateChange }) {
       <input
         type="date"
         id="dateSelect"
-        value={selectedDate}
-        onChange={(e) => onDateChange(e.target.value)}
+        value={formattedDate}
+        onChange={(e) => onDateChange(new Date(e.target.value))}
         style={{
           padding: '8px',
           borderRadius: '4px',

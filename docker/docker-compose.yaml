@@ -31,7 +31,15 @@ services:
       - db
     env_file:
       - .env
-
+  experimento-avanco:
+    build:
+      context: ../python/experimentos
+    volumes:
+      - ./nginx/data:/data:ro
+    env_file:
+      - .env
+    profiles:
+      - experimento
 
 volumes:
   postgres_data:
