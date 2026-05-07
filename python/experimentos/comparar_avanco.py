@@ -36,35 +36,44 @@ SYSTEM_PROMPT = (
     "Você é um auditor sênior de obras rodoviárias do DNIT, especializado em "
     "análise de imagens ortomosaicas obtidas por drones. "
     "Sua função é comparar duas imagens de uma mesma área de obra em momentos "
-    "distintos e identificar com precisão o que avançou fisicamente. (para niveis de testes considere o amarelo como objeto)"
+    "distintos e identificar com precisão o que avançou fisicamente.\n\n"
+    "CONTEXTO DE TESTE: As imagens que você vai receber contêm QUADRADOS AMARELOS "
+    "desenhados sobre a foto original. Esses quadrados amarelos simulam elementos "
+    "de obra (estruturas, pavimentação, etc.) para fins de teste. "
+    "Trate cada quadrado amarelo como se fosse um elemento real da obra. "
+    "Se na imagem DEPOIS houver quadrados novos ou maiores em relação à imagem ANTES, "
+    "isso representa avanço físico da obra."
 )
 
 USER_PROMPT = """\
-Você recebeu DUAS imagens ortomosaicas da mesma área de obra:
+⚠️ CENÁRIO DE TESTE — Os quadrados amarelos nas imagens representam elementos de obra.
+
+Você recebeu DUAS imagens da mesma área:
 
 • Imagem 1 (ANTES) — primeira imagem enviada
 • Imagem 2 (DEPOIS) — segunda imagem enviada
 
+Compare as duas imagens focando nos QUADRADOS AMARELOS como indicadores de avanço.
 Responda em português com a seguinte estrutura:
 
 ## 1. Avanços físicos identificados
-Liste cada avanço observado, com:
-- Descrição objetiva do que mudou (elemento, localização aproximada na imagem)
-- Evidência visual que sustenta a conclusão
+Para cada quadrado amarelo novo ou que mudou de tamanho/posição entre ANTES e DEPOIS:
+- Localização aproximada na imagem (ex: canto superior esquerdo, centro, etc.)
+- O que mudou (apareceu, cresceu, moveu, etc.)
 - Nível de confiança: [ALTO | MÉDIO | BAIXO]
 
 ## 2. Estimativa de avanço geral (%)
-Com base nas mudanças visuais, estime o percentual de avanço físico entre as duas imagens.
-Justifique a estimativa com base nos elementos observados.
+Estime o percentual de avanço com base na quantidade/tamanho dos quadrados amarelos
+que apareceram ou cresceram na imagem DEPOIS em relação à ANTES.
 Formato: X% — Justificativa: ...
 
 ## 3. Elementos sem alteração aparente
-Liste as partes da obra que não apresentaram mudança visível.
+Quadrados ou áreas que permaneceram iguais entre as duas imagens.
 
 ## 4. Observações adicionais
-Anomalias, riscos ou pontos de atenção que merecem destaque.
+Qualquer outra diferença visual relevante entre as duas imagens.
 
-Seja direto e técnico. Evite descrições genéricas.
+Seja direto e objetivo.
 """
 
 # ── Funções ───────────────────────────────────────────────────────────────────
