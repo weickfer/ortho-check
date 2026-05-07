@@ -36,7 +36,7 @@ SYSTEM_PROMPT = (
     "Você é um auditor sênior de obras rodoviárias do DNIT, especializado em "
     "análise de imagens ortomosaicas obtidas por drones. "
     "Sua função é comparar duas imagens de uma mesma área de obra em momentos "
-    "distintos e identificar com precisão o que avançou fisicamente."
+    "distintos e identificar com precisão o que avançou fisicamente. (para niveis de testes considere o amarelo como objeto)"
 )
 
 USER_PROMPT = """\
