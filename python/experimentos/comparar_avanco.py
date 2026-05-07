@@ -53,27 +53,35 @@ Você recebeu DUAS imagens da mesma área:
 • Imagem 1 (ANTES) — primeira imagem enviada
 • Imagem 2 (DEPOIS) — segunda imagem enviada
 
-Compare as duas imagens focando nos QUADRADOS AMARELOS como indicadores de avanço.
+Compare as duas imagens focando nos QUADRADOS AMARELOS.
 Responda em português com a seguinte estrutura:
 
-## 1. Avanços físicos identificados
-Para cada quadrado amarelo novo ou que mudou de tamanho/posição entre ANTES e DEPOIS:
-- Localização aproximada na imagem (ex: canto superior esquerdo, centro, etc.)
-- O que mudou (apareceu, cresceu, moveu, etc.)
+## 1. Inventário de quadrados amarelos
+Para cada quadrado amarelo encontrado em CADA imagem:
+- Localização na imagem (ex: canto superior esquerdo, centro, etc.)
+- Tamanho estimado (largura × altura aproximados em % da imagem total)
+- Se o quadrado existe só no ANTES, só no DEPOIS, ou em ambos
+
+## 2. Mensuração do avanço
+Para cada quadrado que existe em ambas as imagens ou que é novo no DEPOIS:
+- Tamanho no ANTES (ou "inexistente")
+- Tamanho no DEPOIS
+- Variação: quanto aumentou em área (ex: "cresceu ~40%", "dobrou de tamanho", "novo — não existia")
 - Nível de confiança: [ALTO | MÉDIO | BAIXO]
 
-## 2. Estimativa de avanço geral (%)
-Estime o percentual de avanço com base na quantidade/tamanho dos quadrados amarelos
-que apareceram ou cresceram na imagem DEPOIS em relação à ANTES.
+## 3. Estimativa de avanço geral (%)
+Com base na variação total da área ocupada pelos quadrados amarelos entre ANTES e DEPOIS,
+calcule o percentual de avanço físico.
+Fórmula sugerida: ((área total DEPOIS - área total ANTES) / área total ANTES) × 100
 Formato: X% — Justificativa: ...
 
-## 3. Elementos sem alteração aparente
-Quadrados ou áreas que permaneceram iguais entre as duas imagens.
+## 4. Elementos sem alteração
+Quadrados ou áreas que permaneceram idênticos.
 
-## 4. Observações adicionais
-Qualquer outra diferença visual relevante entre as duas imagens.
+## 5. Observações
+Qualquer outra diferença visual relevante.
 
-Seja direto e objetivo.
+Seja direto, objetivo e QUANTITATIVO. Priorize números e medidas sobre descrições vagas.
 """
 
 # ── Funções ───────────────────────────────────────────────────────────────────
