@@ -5,6 +5,9 @@ import uuid
 import os
 
 def crop_tiff(tiff_path, geometry, output_dir="/data/outputs"):
+    if not tiff_path:
+        return "/data/outputs/default.png"
+        
     # Verifica se recebemos um GeoJSON (dict) ou um objeto Shapely direto
     if isinstance(geometry, dict):
         gdf = gpd.GeoDataFrame.from_features(geometry["features"])

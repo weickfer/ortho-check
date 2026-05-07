@@ -29,7 +29,29 @@ def analyze_bridge_image(image_path: str) -> str:
                     "content": [
                         {
                             "type": "text",
-                            "text": "Baseado nesta imagem ortomosaica de uma área de auditoria de uma ponte, o que você consegue extrair de informação técnica ou visual sobre a obra?"
+                            "text": '''Analise esta imagem ortomosaica como um inspetor de obras rodoviárias.
+Identifique:
+
+* elementos da infraestrutura rodoviária
+* equipamentos e máquinas presentes
+* estágio da obra
+* áreas pavimentadas e não pavimentadas
+* possíveis anomalias
+* drenagem
+* erosão
+* sinalização
+* acessos temporários
+* estruturas incompletas
+* indícios de movimentação recente de solo
+
+Para cada item:
+
+* descreva evidências visuais
+* indique nível de confiança
+* diferencie observação direta de inferência
+
+Evite descrições genéricas.
+'''
                         },
                         {
                             "type": "image_url",

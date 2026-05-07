@@ -17,7 +17,6 @@ class AuditAreaService:
         area = self.calculate_area(geom)
 
         output_path = crop_tiff("/data/02-02-2026.tif", geom, "/data/outputs")
-        
         entity = AuditArea(
             description=request.description,
             geometry=f"SRID=4326;{request.geometry}",
