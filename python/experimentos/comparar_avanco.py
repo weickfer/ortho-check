@@ -15,15 +15,12 @@ import base64
 import sys
 from pathlib import Path
 
-# ── Carrega .env se existir (opcional) ────────────────────────────────────────
+# ── Carrega .env se existir (opcional — no container o env_file do compose já injeta) ──
 try:
     from dotenv import load_dotenv
-    env_file = Path(__file__).parents[2] / "docker" / ".env"
-    if env_file.exists():
-        load_dotenv(env_file)
-        print(f"[info] .env carregado de: {env_file}")
+    load_dotenv()  # carrega .env do diretório atual, se houver
 except ImportError:
-    pass  # python-dotenv não instalado, tudo bem
+    pass
 
 from openai import OpenAI
 
