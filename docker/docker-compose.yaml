@@ -40,6 +40,16 @@ services:
       - .env
     profiles:
       - experimento
+  experimento-avanco-02:
+    build:
+      context: ../python/experimentos
+    command: ["python", "comparar_avanco_02.py"]
+    volumes:
+      - ./nginx/data:/data
+    env_file:
+      - .env
+    profiles:
+      - experimento
 
 volumes:
   postgres_data:
