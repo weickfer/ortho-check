@@ -114,7 +114,7 @@ def comparar_avanco(img_antes: Path, img_depois: Path) -> str:
         + build_image_content(img_depois, "Imagem 2 — DEPOIS")
     )
 
-    print(f"[info] Enviando imagens para {MODEL}...")
+    print(f"[info] Enviando imagens para {MODEL} (temperature=0.0)...")
     response = client.chat.completions.create(
         model=MODEL,
         messages=[
@@ -122,6 +122,7 @@ def comparar_avanco(img_antes: Path, img_depois: Path) -> str:
             {"role": "user",   "content": content},
         ],
         max_tokens=MAX_TOKENS,
+        temperature=0.0,
     )
 
     return response.choices[0].message.content
