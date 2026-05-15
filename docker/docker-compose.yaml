@@ -60,6 +60,16 @@ services:
       - .env
     profiles:
       - experimento
+  experimento-avanco-04:
+    build:
+      context: ../python/experimentos
+    command: ["python", "experimento_04.py"]
+    volumes:
+      - ./nginx/data:/data
+    env_file:
+      - .env
+    profiles:
+      - experimento
 
 volumes:
   postgres_data:

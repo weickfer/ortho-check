@@ -113,7 +113,7 @@ export function Map() {
   // Efeito para atualizar a URL do XYZ e a query string sempre que a data selecionada mudar
   useEffect(() => {
     if (orthoSourceRef.current) {
-      orthoSourceRef.current.setUrl(`http://localhost:8082/tiles/${formattedDate}/{z}/{x}/{y}.png`);
+      orthoSourceRef.current.setUrl(`http://localhost:8082/tiles/2026-02-02/{z}/{x}/{y}.png`);
     }
 
     const params = new URLSearchParams(window.location.search);
