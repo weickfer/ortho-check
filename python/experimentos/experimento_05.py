@@ -104,6 +104,7 @@ def analyze_cropped_area(img_crop: Path) -> dict:
         model=MODEL,
         messages=messages,
         max_tokens=MAX_TOKENS,
+        temperature=0.0,
         response_format={ "type": "json_object" } # Garante a formatação da saída
     )
 
