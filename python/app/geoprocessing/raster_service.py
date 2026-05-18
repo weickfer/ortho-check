@@ -20,7 +20,7 @@ def crop_tiff(tiff_path, geometry, output_dir="/data/outputs"):
 
         out_image, out_transform = mask(src, gdf.geometry, crop=True)
 
-        filename = f"{uuid.uuid4()}.png"
+        filename = f"{uuid.uuid4()}-teste.png"
         
         # Garante que o diretório de destino exista antes de salvar
         os.makedirs(output_dir, exist_ok=True)
